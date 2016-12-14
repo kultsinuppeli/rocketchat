@@ -1,0 +1,7 @@
+---
+- name: ansible-role-letsencrypt
+  src: jaywink.letsencrypt
+  path: roles
+
+- name: ansible-role-rocket
+  src: RocketChat.Server

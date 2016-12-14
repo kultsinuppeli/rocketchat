@@ -1,0 +1,36 @@
+---
+# Install nginx just so the letsencrypt role passes
+- hosts: rocket_server
+  become: yes
+  tags: certs
+  tasks:
+    - name: Install Nginx
+      apt: name=nginx state=present update_cache=yes
+
+# Install setuptools for letsencrypt
+- hosts: rocket_server
+  become: yes
+  tags: certs
+  tasks:
+    - name: Install Setuptools
+      pip:
+        state: latest
+        name: "setuptools"
+        extra_args: --process-dependency-links
+
+- hosts: rocket_server
+  become: yes
+  tags: certs
+  roles:
+    - role: ansible-role-letsencrypt
+      letsencrypt_domain: "{{ rocket_domain }}"
+      letsencrypt_pause_services:
+        - nginx
+
+- name: Apply the RocketChat.Server role to all chat_servers
+  hosts: rocket_server
+  tags: rocket
+  become: yes
+  roles:
+    - ansible-role-rocket
+

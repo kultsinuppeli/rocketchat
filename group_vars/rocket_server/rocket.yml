@@ -1,0 +1,5 @@
+---
+rocket_chat_ssl_generate_certs: false
+rocket_chat_ssl_key_path: "/etc/letsencrypt/live/{{ rocket_domain }}/privkey.pem"
+rocket_chat_ssl_cert_path: "/etc/letsencrypt/live/{{ rocket_domain }}/fullchain.pem"
+rocket_chat_tarball_sha256sum: 8c1a884c4cb08749de9f88bf6be6c30268795fc5a2cbb46e1cafff887ff2c35a
